@@ -1,27 +1,20 @@
 # frozen_string_literal: true
 
 class Representative < ApplicationRecord
-  has_many :news_items, dependent: :delete_all
+  has_many :news_items, dependent: :destroy
 
-  def self.civic_api_to_representative_params(rep_info)
-    reps = []
+  validates :name, :ocd_id, :title, presence: true
 
-    rep_info.officials.each_with_index do |official, index|
-      ocdid_temp = ''
-      title_temp = ''
+  def self.civic_api_to_representative_params(rep_params)
+    rep = find_or_initialize_by(ocd_id: rep_params[:ocd_id])
+    rep.assign_attributes(
+      name: rep_params[:name],
+      title: rep_params[:title],
+      party: rep_params[:party],
+      contact_info: rep_params[:contact_info]
+    )
 
-      rep_info.offices.each do |office|
-        if office.official_indices.include? index
-          title_temp = office.name
-          ocdid_temp = office.division_id
-        end
-      end
-
-      rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
-          title: title_temp })
-      reps.push(rep)
-    end
-
-    reps
+    rep.save if rep.changed?
+    rep
   end
 end
