@@ -20,7 +20,10 @@ $(document).ready(() => {
             })
             .attr('data-county-name', (d) => stateMap.counties[d.properties.COUNTYFP].name)
             .attr('data-county-fips-code', (d) => d.properties.COUNTYFP);
-
+        
+        stateMap.svgElement.selectAll('.actionmap-view-region')
+            .on('click', function(event) {const fips = d3.select(this).attr('data-county-fips-code');
+            window.location.href = '/search?county_fips=$fips'})
         // We dont want to enable clicking in the county view.
         // stateMapUtils.setupEventHandlers(stateMap);
     });
