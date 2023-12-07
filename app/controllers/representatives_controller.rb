@@ -8,7 +8,9 @@ class RepresentativesController < ApplicationController
     @representatives = Representative.all
   end
 
-  def show; end
+  def show
+    @representative = Representative.find(params[:id])
+  end
 
   def new
     @representative = Representative.new
@@ -49,5 +51,5 @@ class RepresentativesController < ApplicationController
 
   def representative_params
     params.require(:representative).permit(:name, :ocd_id, :title)
-  en
+  end
 end

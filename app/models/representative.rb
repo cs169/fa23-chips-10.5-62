@@ -1,7 +1,14 @@
 # frozen_string_literal: true
 
 class Representative < ApplicationRecord
-  has_many :news_items, dependent: :destroy
+  has_many :news_items, dependent: :delete_all
+
+  attribute :street, :string
+  attribute :city, :string
+  attribute :state, :string
+  attribute :zip, :string
+  attribute :party, :string
+  attribute :photo, :string
 
   validates :name, :ocd_id, :title, presence: true
 

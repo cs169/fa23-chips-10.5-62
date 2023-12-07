@@ -1,0 +1,10 @@
+<!== app/views/representatives/show.html.erb -->
+<h1><%= @representative.name %></h1>
+<div>
+  <p><strong>Office:</strong> <%= @representative.title %></p>
+  <p><strong>Party:</strong> <%= @representative.party %></p>
+  <p><strong>Contact:</strong> <%= @representative.street %>, <%= @representative.city %>, <%= @representative.state %> <%= @representative.zip %></p>
+  <% if @ representative.photo.presence? %>
+    <img src="<%= @representative.photo %>" alt="<%= @representative.name %>" />
+  <% end %>
+</div>
