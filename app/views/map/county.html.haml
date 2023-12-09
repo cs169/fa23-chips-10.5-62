@@ -8,6 +8,20 @@
                     %svg.d-inline#actionmap-state-counties-view{ version: 1.1, xmlns: 'http://www.w3.org/2000/svg' }
                         %title  Map of #{@state.name} highlighting #{@county.name}
                         /* SVG element will be filled using d3.js and a topojson file. */
+
+.row
+    .col-12.col-lg-8.offset-lg-2
+        .card
+        .card-header#county-representatives-header
+            %h3.text-center
+            %button.btn.btn-link.collapsed{ 'data-toggle': 'collapse',
+            'data-target': '#county-representatives-collapse', 'aria-expanded': false,
+            'aria-controls': 'county-representatives-collapse' } Representatives in #{@county.name}
+        .collapse#county-representatives-collapse{ 'data-parent': '#county-representatives-header',
+        'aria-labelledby': '#county-representatives-header' }
+            .card-body
+            = link_to 'View Representatives', search_representatives_path(address: @county.name)
+          
 #actionmap-info-box
 .d-none#actionmap-info-container{ 'data-counties': @county_details.to_json, 'data-state': @state.to_json,
 'data-state-topojson-file': asset_path("states/#{@state[:symbol].downcase}.topo.json"),
