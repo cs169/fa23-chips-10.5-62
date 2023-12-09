@@ -2,25 +2,23 @@
 
 require 'rails_helper'
 
-describe State do
-  describe '.std_fips_code' do
-    let(:state) do
-      create(:state, fips_code: fips_code)
-    end
+describe State, type: :model do
+  describe '#std_fips_code' do
+    subject { create(:state, fips_code: fips_code).std_fips_code }
 
-    context 'when fips_code is a single digit' do
+    context 'with a single-digit fips_code' do
       let(:fips_code) { 6 }
 
-      it 'returns a zero-padded string' do
-        expect(state.std_fips_code).to eq('06')
+      it 'pads the code with a leading zero' do
+        is_expected.to eq '06'
       end
     end
 
-    context 'when fips_code is two digits' do
+    context 'with a two-digit fips_code' do
       let(:fips_code) { 10 }
 
-      it 'returns the fips_code as a string' do
-        expect(state.std_fips_code).to eq('10')
+      it 'returns the code as a string without padding' do
+        is_expected.to eq '10'
       end
     end
   end
