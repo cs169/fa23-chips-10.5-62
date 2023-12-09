@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class MyNewsItemsController < SessionController
+  before_action :set_issues_list
   before_action :set_representative
   before_action :set_representatives_list
   before_action :set_news_item, only: %i[edit update destroy]
+
 
   def new
     @news_item = NewsItem.new
@@ -50,6 +52,15 @@ class MyNewsItemsController < SessionController
 
   def set_news_item
     @news_item = NewsItem.find(params[:id])
+  end
+  
+  def set_issues_list
+    @issues_list = ["Free Speech", "Immigration", "Terrorism", "Social Security and
+    Medicare", "Abortion", "Student Loans", "Gun Control", "Unemployment",
+    "Climate Change", "Homelessness", "Racism", "Tax Reform", "Net
+    Neutrality", "Religious Freedom", "Border Security", "Minimum Wage",
+    "Equal Pay"]
+    puts "@issues_list: #{@issues_list.inspect}"
   end
 
   # Only allow a list of trusted parameters through.
