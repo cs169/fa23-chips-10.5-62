@@ -33,7 +33,7 @@ photo: official.photo_url }
   end
 
   def self.format_address(info)
-    return '' if info.nil? || info.empty?
+    return '' if info.blank?
 
     address = info.first
     [address.line1, address.city, address.state, address.zip].join(' ')
