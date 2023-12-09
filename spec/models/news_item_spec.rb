@@ -2,27 +2,36 @@
 
 require 'rails_helper'
 
-describe NewsItem do
-  describe 'when find_for is called' do
-    let(:representative) { create(:representative) }
 
-    it 'return the news item, given a representative' do
-      news_item = create(:news_item, representative: representative)
-      expect(described_class.find_for(representative.id)).to eq(news_item)
+RSpec.describe NewsItem, type: :model do
+  let(:representative) { create(:representative) }
+
+  describe '.find_for' do
+    context 'with an existing news item' do
+      let!(:news_item) { create(:news_item, representative: representative) }
+
+      it 'returns the news item for the given representative' do
+        expect(NewsItem.find_for(representative.id)).to eq(news_item)
+      end
     end
 
-    it 'returns nil if no news item exists for the representative' do
-      expect(described_class.find_for(-1)).to be_nil
+    context 'when no news item exists for the representative' do
+      it 'returns nil' do
+        expect(NewsItem.find_for(-1)).to be_nil
+      end
     end
   end
 
-  describe 'when all_issues is called' do
-    it 'returns the correct list' do
-      issues = ['Free Speech', 'Immigration', 'Terrorism', 'Social Security and Medicare',
-                'Abortion', 'Student Loans', 'Gun Control', 'Unemployment', 'Climate Change',
-                'Homelessness', 'Racism', 'Tax Reform', 'Net Neutrality', 'Religious Freedom',
-                'Border Security', 'Minimum Wage', 'Equal Pay']
-      expect(described_class.all_issues).to match_array(issues)
+  describe '.all_issues' do
+    let(:expected_issues) do
+      ['Free Speech', 'Immigration', 'Terrorism', 'Social Security and Medicare',
+       'Abortion', 'Student Loans', 'Gun Control', 'Unemployment', 'Climate Change',
+       'Homelessness', 'Racism', 'Tax Reform', 'Net Neutrality', 'Religious Freedom',
+       'Border Security', 'Minimum Wage', 'Equal Pay']
+    end
+
+    it 'returns a list of predefined issues' do
+      expect(NewsItem.all_issues).to match_array(expected_issues)
     end
   end
 end
