@@ -27,10 +27,10 @@ class Representative < ApplicationRecord
   end
 
   def self.extract_rep_data(official, info)
-    title, ocd_id = office_info(official, info)
+    title, ocdid = office_info(official, info)
     address = format_address(official.address)
 
-    { name: official.name, ocd_id: ocd_id, title: title, address: address, party: official.party, photo: official.photo_url }
+    { name: official.name, ocdid: ocdid, title: title, address: address, party: official.party, photo: official.photo_url }
   end
 
   def self.format_address(info)

@@ -6,9 +6,9 @@ RSpec.describe RepresentativesController, type: :controller do
   describe 'GET #index' do
     let!(:representatives) do
       [
-        Representative.create(name: 'Evan', ocd_id: '1', title: 'Govenor'),
-        Representative.create(name: 'Sukhpal', ocd_id: '2', title: 'Senator'),
-        Representative.create(name: 'James', ocd_id: '3', title: 'Chief')
+        Representative.create(name: 'Evan', ocdid: '1', title: 'Govenor'),
+        Representative.create(name: 'Sukhpal', ocdid: '2', title: 'Senator'),
+        Representative.create(name: 'James', ocdid: '3', title: 'Chief')
       ]
     end
 
@@ -28,7 +28,7 @@ RSpec.describe RepresentativesController, type: :controller do
     let(:representative) do
       Representative.create(
         name: 'Sukhpal Evan',
-        ocd_id: '3',
+        ocdid: '3',
         title: 'Representative',
         address: '23 Hello St',
         party: 'Labor',
@@ -44,7 +44,7 @@ RSpec.describe RepresentativesController, type: :controller do
 
     it 'verifies attributes' do
       expect(assigns(:name)).to eq('Sukhpal Evan')
-      expect(assigns(:ocd_id)).to eq('3')
+      expect(assigns(:ocdid)).to eq('3')
       expect(assigns(:title)).to eq('Representative')
       expect(assigns(:address)).to eq('23 Hello St')
       expect(assigns(:party)).to eq('Labor')
