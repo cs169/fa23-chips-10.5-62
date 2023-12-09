@@ -13,6 +13,7 @@ describe Representative do
         offices:   [OpenStruct.new(name: 'President', division_id: 'ocd-id', official_indices: [0])]
       )
     end
+
     it 'does not create a duplicate one' do
       existing_rep
       expect { described_class.civic_api_to_representative_params(rep_info) }.not_to change(described_class, :count)

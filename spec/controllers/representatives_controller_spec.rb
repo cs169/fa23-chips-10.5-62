@@ -1,4 +1,4 @@
-#frozen_string_literal: true
+# frozen_string_literal: true
 
 require 'rails_helper'
 
@@ -27,16 +27,16 @@ RSpec.describe RepresentativesController, type: :controller do
   describe 'GET #show' do
     let(:representative) do
       Representative.create(
-        name: 'Sukhpal Evan',
-        ocdid: '3',
-        title: 'Representative',
+        name:    'Sukhpal Evan',
+        ocdid:   '3',
+        title:   'Representative',
         address: '23 Hello St',
-        party: 'Labor',
-        photo: 'photo.jpg'
+        party:   'Labor',
+        photo:   'photo.jpg'
       )
     end
 
-    before { get :show, params: {id: representative.id } }
+    before { get :show, params: { id: representative.id } }
 
     it 'assigns the requested representative as @representative' do
       expect(assigns(:representative)).to eq(representative)

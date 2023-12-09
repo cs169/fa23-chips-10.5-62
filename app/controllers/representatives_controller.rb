@@ -8,10 +8,10 @@ class RepresentativesController < ApplicationController
   def show
     @representative = Representative.find(params[:id])
 
-    
     @name = @representative.name
     @title = @representative.title
     @ocdid = @representative.ocdid
+    @address = @representative.address
     @party = @representative.party
     @photo = @representative.photo
 
