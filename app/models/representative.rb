@@ -18,8 +18,10 @@ class Representative < ApplicationRecord
   end
 
   def self.office_info(official, rep_info)
+    official_index = rep_info.officials.index(official)
+
     rep_info.offices.each do |office|
-      return [office.name, office.division_id] if office.official_indices.include?(official.index)
+      return [office.name, office.division_id] if office.official_indices.include?(official_index)
     end
     ['', '']
   end
