@@ -11,7 +11,7 @@ class RepresentativesController < ApplicationController
     
     @name = @representative.name
     @title = @representative.title
-    @ocd_id = @representative.ocd_id
+    @ocdid = @representative.ocdid
     @party = @representative.party
     @photo = @representative.photo
 
